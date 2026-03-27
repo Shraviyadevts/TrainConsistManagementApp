@@ -2,9 +2,9 @@ import java.util.*;
 
 /**
  * =============================================================
- * MAIN CLASS - TrainConsistAppUC3
+ * MAIN CLASS - TrainConsistAppUC4
  * =============================================================
- * UC3: Track Unique Bogie IDs (Set – HashSet)
+ * UC4: Maintain Ordered Bogie IDs (LinkedList)
  */
 public class TrainConsistManagementApp {
 
@@ -12,21 +12,36 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create HashSet for unique bogie IDs
-        Set<String> bogieIds = new HashSet<>();
+        // Create LinkedList for train consist
+        LinkedList<String> trainConsist = new LinkedList<>();
 
-        // Adding bogie IDs (including duplicates)
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
-        bogieIds.add("BG101"); // Duplicate
-        bogieIds.add("BG102"); // Duplicate
+        // Add bogies (initial sequence)
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
 
-        // Display final set
-        System.out.println("\nUnique Bogie IDs:");
-        System.out.println(bogieIds);
+        // Display initial consist
+        System.out.println("\nInitial Train Consist:");
+        System.out.println(trainConsist);
 
-        System.out.println("\nNote: Duplicate IDs are automatically ignored.");
+        // Insert Pantry Car at position 2 (index 2)
+        trainConsist.add(2, "Pantry Car");
+
+        System.out.println("\nAfter adding Pantry Car at position 2:");
+        System.out.println(trainConsist);
+
+        // Remove first and last bogie
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
+
+        System.out.println("\nAfter removing first and last bogie:");
+        System.out.println(trainConsist);
+
+        System.out.println("\nFinal Ordered Train Consist:");
+        System.out.println(trainConsist);
+
         System.out.println("\nSystem ready for further operations...");
     }
 }
