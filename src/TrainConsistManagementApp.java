@@ -2,9 +2,9 @@ import java.util.*;
 
 /**
  * =============================================================
- * MAIN CLASS - TrainConsistAppUC2
+ * MAIN CLASS - TrainConsistAppUC3
  * =============================================================
- * UC2: Add Passenger Bogies to Train (ArrayList Operations)
+ * UC3: Track Unique Bogie IDs (Set – HashSet)
  */
 public class TrainConsistManagementApp {
 
@@ -12,34 +12,21 @@ public class TrainConsistManagementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create ArrayList for passenger bogies
-        List<String> passengerBogies = new ArrayList<>();
+        // Create HashSet for unique bogie IDs
+        Set<String> bogieIds = new HashSet<>();
 
-        // Adding bogies (CREATE)
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        // Adding bogie IDs (including duplicates)
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101"); // Duplicate
+        bogieIds.add("BG102"); // Duplicate
 
-        // Display bogies after addition (READ)
-        System.out.println("\nPassenger Bogies after addition:");
-        System.out.println(passengerBogies);
+        // Display final set
+        System.out.println("\nUnique Bogie IDs:");
+        System.out.println(bogieIds);
 
-        // Remove a bogie (DELETE)
-        passengerBogies.remove("AC Chair");
-        System.out.println("\nAfter removing 'AC Chair':");
-        System.out.println(passengerBogies);
-
-        // Check existence (READ)
-        if (passengerBogies.contains("Sleeper")) {
-            System.out.println("\n'Sleeper' bogie exists in the train.");
-        } else {
-            System.out.println("\n'Sleeper' bogie not found.");
-        }
-
-        // Final state
-        System.out.println("\nFinal Passenger Bogies List:");
-        System.out.println(passengerBogies);
-
+        System.out.println("\nNote: Duplicate IDs are automatically ignored.");
         System.out.println("\nSystem ready for further operations...");
     }
 }
