@@ -1,7 +1,6 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
-// Bogie class
+// Bogie class (same as previous UCs)
 class Bogie {
     String name;
     int capacity;
@@ -19,32 +18,23 @@ class Bogie {
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
-        // Step 1: Create list of bogies (reuse UC7/UC8)
+        // Step 1: Create list of bogies
         List<Bogie> bogieList = new ArrayList<>();
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 56));
         bogieList.add(new Bogie("First Class", 24));
-        bogieList.add(new Bogie("Sleeper", 70));   // duplicate type for grouping
-        bogieList.add(new Bogie("AC Chair", 60));  // duplicate type
+        bogieList.add(new Bogie("Sleeper", 70)); // extra bogie
 
-        // Step 2: Group bogies using Stream API
-        Map<String, List<Bogie>> groupedBogies = bogieList.stream()
-                .collect(Collectors.groupingBy(b -> b.name));
+        // Step 2: Use Stream to calculate total capacity
+        int totalSeats = bogieList.stream()
+                .map(b -> b.capacity)          // Extract capacity
+                .reduce(0, Integer::sum);      // Aggregate sum
 
-        // Step 3: Display grouped result
-        System.out.println("Bogies Grouped by Type:\n");
+        // Step 3: Display result
+        System.out.println("Total Seating Capacity of Train: " + totalSeats);
 
-        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
-            System.out.println("Type: " + entry.getKey());
-
-            for (Bogie b : entry.getValue()) {
-                b.display();
-            }
-            System.out.println();
-        }
-
-        // Step 4: Verify original list remains unchanged
-        System.out.println("Original Bogie List (Unchanged):");
+        // Step 4: Verify original list unchanged
+        System.out.println("\nOriginal Bogie List (Unchanged):");
         bogieList.forEach(Bogie::display);
     }
 }
