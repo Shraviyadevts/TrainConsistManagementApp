@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-// Bogie class (same as UC7)
+// Bogie class
 class Bogie {
     String name;
     int capacity;
@@ -19,31 +19,32 @@ class Bogie {
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
-        // Step 1: Create list of bogies (reuse UC7)
+        // Step 1: Create list of bogies (reuse UC7/UC8)
         List<Bogie> bogieList = new ArrayList<>();
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 56));
         bogieList.add(new Bogie("First Class", 24));
-        bogieList.add(new Bogie("Luxury AC", 80)); // extra for testing
+        bogieList.add(new Bogie("Sleeper", 70));   // duplicate type for grouping
+        bogieList.add(new Bogie("AC Chair", 60));  // duplicate type
 
-        // Step 2: Define capacity threshold
-        int threshold = 60;
+        // Step 2: Group bogies using Stream API
+        Map<String, List<Bogie>> groupedBogies = bogieList.stream()
+                .collect(Collectors.groupingBy(b -> b.name));
 
-        // Step 3: Apply Stream filtering
-        List<Bogie> filteredBogies = bogieList.stream()
-                .filter(b -> b.capacity > threshold)
-                .collect(Collectors.toList());
+        // Step 3: Display grouped result
+        System.out.println("Bogies Grouped by Type:\n");
 
-        // Step 4: Display filtered bogies
-        System.out.println("Bogies with Capacity > " + threshold + ":");
-        if (filteredBogies.isEmpty()) {
-            System.out.println("No bogies match the criteria.");
-        } else {
-            filteredBogies.forEach(Bogie::display);
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("Type: " + entry.getKey());
+
+            for (Bogie b : entry.getValue()) {
+                b.display();
+            }
+            System.out.println();
         }
 
-        // Step 5: Verify original list is unchanged
-        System.out.println("\nOriginal Bogie List (Unchanged):");
+        // Step 4: Verify original list remains unchanged
+        System.out.println("Original Bogie List (Unchanged):");
         bogieList.forEach(Bogie::display);
     }
 }
