@@ -1,34 +1,45 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
-/**
- * =============================================================
- * MAIN CLASS - TrainConsistAppUC5
- * =============================================================
- * UC5: Preserve Insertion Order of Bogies (LinkedHashSet)
- */
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        System.out.println("=== Train Consist Management App ===");
+        Scanner scanner = new Scanner(System.in);
 
-        // Create LinkedHashSet for train formation
-        Set<String> trainFormation = new LinkedHashSet<>();
+        // Step 1: Create HashMap to store bogie-capacity mapping
+        HashMap<String, Integer> bogieCapacityMap = new HashMap<>();
 
-        // Add bogies
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
+        System.out.println("=== Train Consist Management System ===");
+        System.out.println("Enter number of bogies to add:");
 
-        // Attempt to add duplicate
-        trainFormation.add("Sleeper"); // Duplicate (ignored)
+        int n = scanner.nextInt();
+        scanner.nextLine(); // consume newline
 
-        // Display final formation
-        System.out.println("\nTrain Formation (Insertion Order Preserved):");
-        System.out.println(trainFormation);
+        // Step 2: Insert entries using put()
+        for (int i = 1; i <= n; i++) {
+            System.out.println("\nEnter Bogie Name " + i + ":");
+            String bogieName = scanner.nextLine();
 
-        System.out.println("\nNote: Duplicate bogies are automatically ignored.");
-        System.out.println("\nSystem ready for further operations...");
+            System.out.println("Enter Capacity for " + bogieName + ":");
+            int capacity = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            bogieCapacityMap.put(bogieName, capacity);
+        }
+
+        // Step 3: Display bogie-capacity mapping
+        System.out.println("\n=== Bogie Capacity Details ===");
+
+        // Step 4: Iterate using entrySet()
+        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
+            System.out.println("Bogie: " + entry.getKey() +
+                    " | Capacity: " + entry.getValue());
+        }
+
+        System.out.println("\nProgram Completed Successfully.");
+
+        scanner.close();
     }
 }
